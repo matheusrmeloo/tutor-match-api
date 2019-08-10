@@ -1,0 +1,24 @@
+{
+    "extends": [
+        "tslint:recommended"
+    ],
+    "rules": {
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "forin": false,
+        "interface-name": [
+            true,
+            "never-prefix"
+        ],
+        "object-literal-key-quotes": false,
+        "object-literal-sort-keys": false,
+        "no-console": false,
+        "no-duplicate-variable": true,
+        "no-unused-variable": [
+            false
+        ]
+    },
+    "rulesDirectory": [
+        "node_modules/tslint-eslint-rules/dist/rules"
+    ]
+}

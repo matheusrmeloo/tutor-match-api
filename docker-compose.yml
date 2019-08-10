@@ -1,0 +1,46 @@
+version: '3'
+
+volumes:
+  database: {}
+
+services:
+  app:
+    command: bash -c "npm install && npm start"
+    container_name: app
+    environment:
+      - TZ=America/Sao_Paulo
+    depends_on:
+      - mariadb
+    image: node:10
+    links:
+      - mariadb
+    ports:
+     - "4000:4000"
+    volumes:
+      - .:/usr/app-test/
+      - /usr/app-test/node_modules
+    working_dir: /usr/app-test/
+
+  mariadb:
+    container_name: app-mariadb
+    environment:
+      - TZ=America/Sao_Paulo
+      - MYSQL_ROOT_PASSWORD=123
+      - MYSQL_DATABASE=quick
+    image: mariadb
+    ports:
+      - "8889:8889"
+    volumes:
+      - database:/var/lib/mariadb-test
+
+  phpmyadmin:
+    container_name: app-phpmyadmin-test
+    environment:
+      - TZ=America/Sao_Paulo
+      - PMA_HOST=mariadb:8889
+    depends_on:
+      - mariadb
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - 8081:80
+    restart: always
